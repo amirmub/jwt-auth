@@ -8,9 +8,9 @@ const dbConnection = mysql2.createPool({
   connectionLimit: 10,
 });
 
-dbConnection.getConnection((err) => {
-  if (err) console.log(err.message);
-  else console.log("db connected");
-});
+// dbConnection.getConnection((err) => {
+//   if (err) console.log(err.message);
+//   else console.log("db connected");
+// });
 
-module.exports = dbConnection;
+module.exports = dbConnection.promise()

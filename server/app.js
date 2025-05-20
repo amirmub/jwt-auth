@@ -1,18 +1,25 @@
-const express = require("express")
+const express = require("express");
 
 const app = express();
 // listening port number
 const port = 5500;
 
-const dbConnection = require("./db/db.config")
+// db file
+const dbConnection = require("./db/db.config");
 
 // users route
-const userRouter = require("./routes/userRoutes")
-app.use("/api/users",userRouter)
+const userRouter = require("./routes/userRoutes");
+app.use("/api/users", userRouter);
 
+async function start() {
+  try {
+    const result = dbConnection.getConnection();
+    app.listen(port);
+    console.log("db connected");
+    console.log(`its listening port http://localhost:${port}`);
+  } catch (error) {
+    console.log(error.message);
+  }
+}
 
-app.listen(port,(err) =>{
-    if(err) console.log(err.message);
-    else console.log(`its listening: http://localhost:${port}`);
-    
-})
+start();
