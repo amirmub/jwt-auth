@@ -38,7 +38,30 @@ async function register(req, res) {
 
 // login controller
 async function login(req, res) {
-  res.status(201).json({ msg: "login user" });
+  const { email, password } = req.body;
+  if (!email || !password) {
+    return res.status(400).json({ msg: "please enter all required fields " });
+  }
+  try {
+    const [existedUser] = await dbConnection.query(
+      "SELECT user_id,username,password From users WHERE email = ?",
+      [email]
+    );
+    // user is existed or not
+    if (existedUser == 0) {
+      return res.status(400).json({ msg: "Account does not exist yet." });
+    }
+    // compared password
+    const isMatch = await bcrypt.compare(password,existedUser[0].password)
+    if(!isMatch){
+        return res.status(400).json({ msg: "incorrect password" });
+    }
+    return res.status(201).json({ msg: "login successfully" });
+
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).json({ msg: "Internal server errors" });
+  }
 }
 
 // checkUser controller
