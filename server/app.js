@@ -4,6 +4,9 @@ const app = express();
 // listening port number
 const port = 5500;
 
+//  Middleware to parse JSON
+app.use(express.json());
+
 // db file
 const dbConnection = require("./db/db.config");
 
