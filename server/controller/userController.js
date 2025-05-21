@@ -1,5 +1,6 @@
 const dbConnection = require("../db/db.config");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken")
 
 // register controller
 async function register(req, res) {
@@ -29,7 +30,7 @@ async function register(req, res) {
       "INSERT INTO users (username, firstname, lastname, email, password) VALUES (?,?,?,?,?)",
       [username, firstname, lastname, email, hashedPassword]
     );
-    return res.status(201).json({ msg: "register successfully" });
+
   } catch (error) {
     console.log(error.message);
     res.status(500).json({ msg: "Internal server errors" });
@@ -56,8 +57,13 @@ async function login(req, res) {
     if(!isMatch){
         return res.status(400).json({ msg: "incorrect password" });
     }
-    return res.status(201).json({ msg: "login successfully" });
+      // JWT Token
+    const user_id = existedUser[0].user_id;
+    const usename = existedUser[0].usename;
 
+    const Token = jwt.sign({user_id,usename},"secret",{expiresIn : "1d"})
+    return res.status(200).json({ msg: "register successfully",Token });
+    
   } catch (error) {
     console.log(error.message);
     res.status(500).json({ msg: "Internal server errors" });
