@@ -2,12 +2,15 @@ const jwt = require("jsonwebtoken");
 
 async function authMiddleware(req,res,next) {
     const authHeader = req.headers.authorization;
-    if (!authHeader) {
+    if (!authHeader || !authHeader.startsWith("Bearer ")) {
         res.status(400).json({ msg : "there is no token"})
     } 
+    const Token = authHeader.split(' ')[1]
+    console.log(Token);
+    
 
     try {
-        const {user_id, username} = jwt.verify(authHeader,"secret")
+        const {user_id, username} = jwt.verify(Token,"secret")
         req.user = {user_id, username} 
         next();
     } catch (error) {
