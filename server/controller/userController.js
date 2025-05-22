@@ -61,7 +61,7 @@ async function login(req, res) {
     const user_id = existedUser[0].user_id;
     const usename = existedUser[0].usename;
 
-    const Token = jwt.sign({user_id,usename},"secret",{expiresIn : "1d"})
+    const Token = jwt.sign({user_id,usename},"secret",{expiresIn : "1y"})
     return res.status(200).json({ msg: "register successfully",Token });
     
   } catch (error) {
@@ -72,7 +72,10 @@ async function login(req, res) {
 
 // checkUser controller
 async function checkUser(req, res) {
-  res.status(201).json({ msg: "check users" });
+  const user_id = req.user.user_id;
+  const username = req.user.username;
+
+  res.status(201).json({ msg: "check users",user_id,username });
 }
 
 module.exports = { register, login, checkUser };
