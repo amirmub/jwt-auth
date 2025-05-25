@@ -1,8 +1,13 @@
+require("cors")
 const express = require("express");
 
 const app = express();
 // listening port number
 const port = 5500;
+
+// cors policy
+const cors = require("cors")
+app.use(cors())
 
 //  Middleware to parse JSON
 app.use(express.json());
