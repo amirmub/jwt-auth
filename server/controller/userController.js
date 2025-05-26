@@ -64,7 +64,7 @@ async function login(req, res) {
     const usename = existedUser[0].usename;
 
     const Token = jwt.sign({ user_id, usename }, "secret", { expiresIn: "1y" });
-    return res.status(200).json({ msg: "register successfully", Token });
+    return res.status(200).json({ msg: "Login successfully", Token });
   } catch (error) {
     console.log(error.message);
     res.status(500).json({ msg: "Internal server errors" });
