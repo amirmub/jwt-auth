@@ -1,6 +1,6 @@
 const dbConnection = require("../db/db.config");
 const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken")
+const jwt = require("jsonwebtoken");
 
 // register controller
 async function register(req, res) {
@@ -31,6 +31,8 @@ async function register(req, res) {
       [username, firstname, lastname, email, hashedPassword]
     );
 
+    res.status(400).json({ msg: "successfully register" });
+    
   } catch (error) {
     console.log(error.message);
     res.status(500).json({ msg: "Internal server errors" });
@@ -53,17 +55,16 @@ async function login(req, res) {
       return res.status(400).json({ msg: "Account does not exist yet." });
     }
     // compared password
-    const isMatch = await bcrypt.compare(password,existedUser[0].password)
-    if(!isMatch){
-        return res.status(400).json({ msg: "incorrect password" });
+    const isMatch = await bcrypt.compare(password, existedUser[0].password);
+    if (!isMatch) {
+      return res.status(400).json({ msg: "incorrect password" });
     }
-      // JWT Token
+    // JWT Token
     const user_id = existedUser[0].user_id;
     const usename = existedUser[0].usename;
 
-    const Token = jwt.sign({user_id,usename},"secret",{expiresIn : "1y"})
-    return res.status(200).json({ msg: "register successfully",Token });
-    
+    const Token = jwt.sign({ user_id, usename }, "secret", { expiresIn: "1y" });
+    return res.status(200).json({ msg: "register successfully", Token });
   } catch (error) {
     console.log(error.message);
     res.status(500).json({ msg: "Internal server errors" });
@@ -75,7 +76,7 @@ async function checkUser(req, res) {
   const user_id = req.user.user_id;
   const username = req.user.username;
 
-  res.status(201).json({ msg: "check users",user_id,username });
+  res.status(201).json({ msg: "check users", user_id, username });
 }
 
 module.exports = { register, login, checkUser };

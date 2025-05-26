@@ -1,9 +1,10 @@
+import Landing from "./pages/Landing"
 
 function App() {
 
   return (
     <>
-    <h1>test</h1>
+     <Landing />
     </>
   )
 }

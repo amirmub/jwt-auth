@@ -2,7 +2,7 @@ const express = require("express");
 
 const app = express();
 // listening port number
-const port = 5500;
+const port = 5555;
 
 // cors policy
 const cors = require("cors")
