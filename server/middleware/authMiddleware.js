@@ -6,7 +6,7 @@ async function authMiddleware(req,res,next) {
         res.status(400).json({ msg : "there is no token"})
     } 
     const Token = authHeader.split(' ')[1]
-    console.log(Token);
+    // console.log(Token);
     
 
     try {
