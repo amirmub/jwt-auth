@@ -31,7 +31,7 @@ async function register(req, res) {
       [username, firstname, lastname, email, hashedPassword]
     );
 
-    res.status(201).json({ msg: "successfully register" });
+    res.status(201).json({ msg: "successfully register",username });
     
   } catch (error) {
     console.log(error.message);

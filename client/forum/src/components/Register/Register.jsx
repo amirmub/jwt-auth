@@ -1,9 +1,11 @@
-import { useRef } from "react";
+import { useContext, useRef } from "react";
 import axios from "../../utills/axios";
-import {useNavigate} from "react-router-dom"
-
+import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../pages/Landing";
 
 function Register() {
+  const { setPerson } = useContext(UserContext);
+
   const navigate = useNavigate();
 
   const usernameDom = useRef();
@@ -21,21 +23,19 @@ function Register() {
     const passwordValue = passwordDom.current.value;
 
     try {
-      const response = await axios.post("/users/register",
-        {
-        username : usernameValue,
-        firstname : firstnameValue,
-        lastname : lastnameValue,
-        email : emailValue,
-        password : passwordValue
+      const response = await axios.post("/users/register", {
+        username: usernameValue,
+        firstname: firstnameValue,
+        lastname: lastnameValue,
+        email: emailValue,
+        password: passwordValue,
       });
-
-      // console.log(response);
+      // localStorage.setItem("Token", response.data.Token);
+      setPerson(response.data); // Set the person context
+      console.log(response.data);
       navigate("/");
-      
     } catch (error) {
       console.log(error.response);
-      
     }
   }
 
