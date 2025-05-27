@@ -1,9 +1,10 @@
-import { useRef } from "react";
+import { useRef, useContext } from "react";
 import axios from "../../utills/axios";
-import {useNavigate} from "react-router-dom"
-
+import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../pages/Landing";
 
 function Login() {
+  const { setPerson } = useContext(UserContext);
   const navigate = useNavigate();
 
   const emailDom = useRef();
@@ -15,19 +16,17 @@ function Login() {
     const passwordValue = passwordDom.current.value;
 
     try {
-      const response = await axios.post("/users/login",
-        {
-        email : emailValue,
-        password : passwordValue
+      const response = await axios.post("/users/login", {
+        email: emailValue,
+        password: passwordValue,
       });
 
-      console.log(response);
       localStorage.setItem("Token", response.data.Token);
+      setPerson(response.data); 
+
       navigate("/");
-      
     } catch (error) {
       console.log(error.response);
-      
     }
   }
 
@@ -35,12 +34,12 @@ function Login() {
     <div>
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="">email :--</label>
+          <label>email :--</label>
           <input ref={emailDom} type="email" placeholder="email" />
         </div>
         <br />
         <div>
-          <label htmlFor="">password :--</label>
+          <label>password :--</label>
           <input ref={passwordDom} type="password" placeholder="password" />
         </div>
         <button>Login</button>

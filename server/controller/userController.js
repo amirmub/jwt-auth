@@ -61,10 +61,10 @@ async function login(req, res) {
     }
     // JWT Token
     const user_id = existedUser[0].user_id;
-    const usename = existedUser[0].usename;
+    const username = existedUser[0].username;
 
-    const Token = jwt.sign({ user_id, usename }, "secret", { expiresIn: "1y" });
-    return res.status(200).json({ msg: "Login successfully", Token });
+    const Token = jwt.sign({ user_id, username }, "secret", { expiresIn: "1y" });
+    return res.status(200).json({ msg: "Login successfully", Token,username: username });
   } catch (error) {
     console.log(error.message);
     res.status(500).json({ msg: "Internal server errors" });

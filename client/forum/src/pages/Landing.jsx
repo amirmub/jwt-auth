@@ -2,43 +2,44 @@ import { Route, Routes, useNavigate } from "react-router-dom";
 import Home from "../components/Home/Home";
 import Login from "../components/Login/Login";
 import Register from "../components/Register/Register";
-import { useEffect, useState } from "react";
+import { useEffect, useState, createContext } from "react";
 import axios from "../utills/axios";
 
-function Landing() {
-  const navigate = useNavigate();
-  const [loading, setLoading] = useState(true);
+export const UserContext = createContext();
 
+function Landing() {
+  const [person, setPerson] = useState(null);
+  const navigate = useNavigate();
+  
   async function checkUser() {
-      try {
-        const token = localStorage.getItem("Token");
-        await axios.get("/users/check", {
-          headers: {
-            Authorization: "Bearer " + token,
-          }
-        });
-      } catch (error) {
-        navigate("/login");
-        console.log(error?.response);
-      } finally {
-        setLoading(false);
-      }
+    const token = localStorage.getItem("Token");
+    try {
+      const { data } = await axios.get("/users/check", {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      });
+
+      setPerson(data); // Set the person context
+      // console.log("User data:", data);
+    } catch (error) {
+      console.log("Auth error:", error?.response);
+      navigate("/login"); // Redirect to login if unauthorized
     }
+  }
 
   useEffect(() => {
-    checkUser();
-  }, [navigate]);
-
-  if (loading) return <div>Checking authentication...</div>;
+    checkUser(); // Check user on mount
+  }, []);
 
   return (
-    <div>
+    <UserContext.Provider value={{ person, setPerson }}>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
       </Routes>
-    </div>
+    </UserContext.Provider>
   );
 }
 
