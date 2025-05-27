@@ -4,6 +4,7 @@ import Login from "../components/Login/Login";
 import Register from "../components/Register/Register";
 import { useEffect, useState, createContext } from "react";
 import axios from "../utills/axios";
+import Header from "../components/Header/Header";
 
 export const UserContext = createContext();
 
@@ -34,6 +35,7 @@ function Landing() {
 
   return (
     <UserContext.Provider value={{ person, setPerson }}>
+      <Header />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/register" element={<Register />} />
