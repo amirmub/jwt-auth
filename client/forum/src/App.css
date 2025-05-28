@@ -7,4 +7,6 @@
 body {
   /* background-color: #e3e6e6; */
   background: url(./asset/evangadi-bg.svg);
+  background-size: cover;
+  background-repeat: no-repeat;
 }

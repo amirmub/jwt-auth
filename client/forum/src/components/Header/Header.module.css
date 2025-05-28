@@ -1,6 +1,9 @@
 .header_container {
-  background-color:hsl(0, 0%, 95%);
+  background-color:hsl(0, 0%, 100%);
+  z-index: 100;
+  box-sizing: 1px 1px 10px #fff;
   padding: 20px 30px;
+  box-shadow: 1px 0px .8px ;
 }
 .header_item {
   display: flex;
