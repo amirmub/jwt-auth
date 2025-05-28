@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../../pages/Landing";
 import classes from "./Register.module.css";
 
-function Register() {
+function Register({ onSwitch }) {
   const { setPerson } = useContext(UserContext);
 
   const navigate = useNavigate();
@@ -43,7 +43,10 @@ function Register() {
     <div className={classes.register_container}>
       <p>Join the network</p>
       <span>
-        Already have an account? <Link to="">Sign In</Link>
+        Already have an account?{" "}
+        <Link to="" onClick={onSwitch}>
+          Sign In
+        </Link>
       </span>
       <div>
         <form onSubmit={handleSubmit}>
@@ -67,7 +70,8 @@ function Register() {
           <br />
           <div>
             <input ref={passwordDom} type="password" placeholder="password" />
-          </div><br />
+          </div>
+          <br />
           <button>Register</button>
         </form>
       </div>

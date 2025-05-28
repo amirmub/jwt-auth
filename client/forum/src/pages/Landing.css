@@ -5,14 +5,14 @@
   height: 350px;
   /* padding: 20px 10px; */
   background-color: #fff;
-  box-shadow: 1px 0px 0px #ffffff;
+  box-shadow: 0px 0px 50px #dedede;
   border-radius: 8px;
   /* overflow: hidden; */
 }
 .form-container {
   position: absolute;
   position: relative;
-  width: 60%;
+  width: 100%;
   height: 100%;
   /* padding: 0px 40px; */
   transition: all 0.6s ease-in-out;
@@ -42,7 +42,7 @@
 .form-panel {
   width: 50%;
   padding: 40px;
-  background-color: white;
+  background-color: #fff;
 }
 .main_wrapper {
   display: flex;
@@ -61,6 +61,6 @@
   }
   .main_container {
     width: 360px;
-    margin: 30px auto ;
+    margin: 30px auto;
   }
 }
