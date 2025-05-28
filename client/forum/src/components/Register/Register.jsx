@@ -67,7 +67,7 @@ function Register() {
           <br />
           <div>
             <input ref={passwordDom} type="password" placeholder="password" />
-          </div>
+          </div><br />
           <button>Register</button>
         </form>
       </div>

@@ -6,13 +6,16 @@ import { useEffect, useState, createContext } from "react";
 import axios from "../utills/axios";
 import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
+import "./Landing.css";
+import About from "../components/About/About";
 
 export const UserContext = createContext();
 
 function Landing() {
   const [person, setPerson] = useState(null);
   const navigate = useNavigate();
-  
+  const [showLogin, setShowLogin] = useState(false);
+
   async function checkUser() {
     const token = localStorage.getItem("Token");
     try {
@@ -39,8 +42,34 @@ function Landing() {
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
+        <Route
+            path="/login"
+          element={
+            <>
+              <div className="main_wrapper">
+                <div className="main_container">
+                  <div
+                    className={`form-container ${
+                      showLogin ? "show-login" : ""
+                    }`}
+                  >
+                    <div className="form-items form-slider">
+                      <div className="register_form form-panel">
+                        <Register onSwitch={() => setShowLogin(true)} />
+                      </div>
+                      <div className="login_form form-panel">
+                        <Login onSwitch={() => setShowLogin(false)} />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="main_about">
+                  <About />
+                </div>
+              </div>
+            </>
+          }
+        />
       </Routes>
       <Footer />
     </UserContext.Provider>

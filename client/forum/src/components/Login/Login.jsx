@@ -1,7 +1,8 @@
 import { useRef, useContext } from "react";
 import axios from "../../utills/axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../../pages/Landing";
+import classes from "./Login.module.css"
 
 function Login() {
   const { setPerson } = useContext(UserContext);
@@ -22,8 +23,8 @@ function Login() {
       });
 
       localStorage.setItem("Token", response.data.Token);
-      setPerson(response.data); 
-      console.log(response.data); 
+      setPerson(response.data);
+      console.log(response.data);
 
       navigate("/");
     } catch (error) {
@@ -32,19 +33,26 @@ function Login() {
   }
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>email :--</label>
-          <input ref={emailDom} type="email" placeholder="email" />
-        </div>
-        <br />
-        <div>
-          <label>password :--</label>
-          <input ref={passwordDom} type="password" placeholder="password" />
-        </div>
-        <button>Login</button>
-      </form>
+    <div className={classes.login_container}>
+      <div>
+        <form onSubmit={handleSubmit}>
+          <p>Login to Your Account</p>
+          <span>
+            Don't have an account?
+            <Link to="" >
+              create a new account
+            </Link>
+          </span>
+          <div>
+            <input ref={emailDom} type="email" placeholder="email" />
+          </div>
+          <br />
+          <div>
+            <input ref={passwordDom} type="password" placeholder="password" />
+          </div><br />
+          <button>Login</button>
+        </form>
+      </div>
     </div>
   );
 }
