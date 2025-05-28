@@ -9,6 +9,7 @@
   font-size: 13px;
   text-align: center;
   margin-bottom: 15px;
+  margin-left: -12.9px;
 }
 .login_container input {
   width: 330px;
@@ -24,7 +25,7 @@
   padding: 10px 0;
 }
 .login_container button {
-  width: 122%;
+  width: 138%;
   padding: 10px 0;
   background-color: #fe6613;
   border: none;
@@ -38,7 +39,7 @@
 }
 .login_container a {
   color: #fe6613;
-  margin-left: 5px;
+  margin-left: 3px;
 }
 .input_value {
   border: 1.335px solid red;

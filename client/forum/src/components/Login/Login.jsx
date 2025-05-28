@@ -38,7 +38,7 @@ function Login({ onSwitch }) {
         <form onSubmit={handleSubmit}>
           <p>Login to Your Account</p>
           <span>
-            Don't have an account?
+             Don't have an account?
             <Link to="" onClick={onSwitch}>create a new account</Link>
           </span>
           <div>
