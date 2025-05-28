@@ -41,7 +41,7 @@
   color: #fe6613;
   margin-left: 3px;
 }
-.input_value {
+.input_error {
   border: 1.335px solid red;
   border-radius: 3px;
 }

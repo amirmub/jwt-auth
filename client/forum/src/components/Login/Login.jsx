@@ -1,10 +1,12 @@
-import { useRef, useContext } from "react";
+import { useRef, useContext, useState } from "react";
 import axios from "../../utills/axios";
 import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../../pages/Landing";
 import classes from "./Login.module.css";
 
 function Login({ onSwitch }) {
+  const [input, setInput] = useState("");
+  const [inputErrorStyle, setInputErrorStyle] = useState(false);
   const { setPerson } = useContext(UserContext);
   const navigate = useNavigate();
 
@@ -15,6 +17,10 @@ function Login({ onSwitch }) {
     e.preventDefault();
     const emailValue = emailDom.current.value;
     const passwordValue = passwordDom.current.value;
+
+    if (!emailValue || !passwordValue) {
+      setInputErrorStyle(true);
+    }
 
     try {
       const response = await axios.post("/users/login", {
@@ -29,6 +35,7 @@ function Login({ onSwitch }) {
       navigate("/");
     } catch (error) {
       console.log(error.response);
+      setInput(error.response.data.msg);
     }
   }
 
@@ -38,17 +45,42 @@ function Login({ onSwitch }) {
         <form onSubmit={handleSubmit}>
           <p>Login to Your Account</p>
           <span>
-             Don't have an account?
-            <Link to="" onClick={onSwitch}>create a new account</Link>
+            Don't have an account?
+            <Link to="" onClick={onSwitch}>
+              create a new account
+            </Link>
           </span>
           <div>
-            <input ref={emailDom} type="email" placeholder="email" />
+            <input
+              ref={emailDom}
+              type="email"
+              placeholder="email"
+              className={
+                inputErrorStyle && !emailDom.current?.value
+                  ? classes.input_error
+                  : ""
+              }
+            />
           </div>
           <br />
           <div>
-            <input ref={passwordDom} type="password" placeholder="password" />
+            <input
+              ref={passwordDom}
+              type="password"
+              placeholder="password"
+              className={
+                inputErrorStyle && !passwordDom.current?.value
+                  ? classes.input_error
+                  : ""
+              }
+            />
           </div>
           <br />
+          <small
+            style={{ color: "red", fontSize: "12px", paddingBottom: "3px" }}
+          >
+            {input}
+          </small>
           <button>Login</button>
           <p style={{ marginTop: "10px ", fontSize: "14px" }}>
             <Link
