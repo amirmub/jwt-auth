@@ -5,6 +5,7 @@ import Register from "../components/Register/Register";
 import { useEffect, useState, createContext } from "react";
 import axios from "../utills/axios";
 import Header from "../components/Header/Header";
+import Footer from "../components/Footer/Footer";
 
 export const UserContext = createContext();
 
@@ -41,6 +42,7 @@ function Landing() {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
       </Routes>
+      <Footer />
     </UserContext.Provider>
   );
 }
