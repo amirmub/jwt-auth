@@ -1,7 +1,8 @@
 import { useContext, useRef } from "react";
 import axios from "../../utills/axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../../pages/Landing";
+import classes from "./Register.module.css";
 
 function Register() {
   const { setPerson } = useContext(UserContext);
@@ -30,7 +31,6 @@ function Register() {
         email: emailValue,
         password: passwordValue,
       });
-      // localStorage.setItem("Token", response.data.Token);
       setPerson(response.data); // Set the person context
       console.log(response.data);
       navigate("/");
@@ -40,34 +40,37 @@ function Register() {
   }
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="">username :--</label>
-          <input ref={usernameDom} type="text" placeholder="username" />
-        </div>
-        <br />
-        <div>
-          <label htmlFor="">firstname :--</label>
-          <input ref={firstnameDom} type="text" placeholder="firstname" />
-        </div>
-        <br />
-        <div>
-          <label htmlFor="">lastname :--</label>
-          <input ref={lastnameDom} type="text" placeholder="lastname" />
-        </div>
-        <br />
-        <div>
-          <label htmlFor="">email :--</label>
-          <input ref={emailDom} type="email" placeholder="email" />
-        </div>
-        <br />
-        <div>
-          <label htmlFor="">password :--</label>
-          <input ref={passwordDom} type="password" placeholder="password" />
-        </div>
-        <button>Register</button>
-      </form>
+    <div className={classes.register_container}>
+      <p>Join the network</p>
+      <span>
+        Already have an account? <Link to="">Sign In</Link>
+      </span>
+      <div>
+        <form onSubmit={handleSubmit}>
+          <div>
+            <input ref={usernameDom} type="text" placeholder="username" />
+          </div>
+          <br />
+          <div className={classes.names}>
+            <div>
+              <input ref={firstnameDom} type="text" placeholder="firstname" />
+            </div>
+            <br />
+            <div>
+              <input ref={lastnameDom} type="text" placeholder="lastname" />
+            </div>
+          </div>
+          <br />
+          <div>
+            <input ref={emailDom} type="email" placeholder="email" />
+          </div>
+          <br />
+          <div>
+            <input ref={passwordDom} type="password" placeholder="password" />
+          </div>
+          <button>Register</button>
+        </form>
+      </div>
     </div>
   );
 }

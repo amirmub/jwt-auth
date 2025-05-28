@@ -1,0 +1,65 @@
+form {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0px 50px;
+}
+.register_container p {
+  padding: 25px 0 15px 0;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 500;
+}
+.register_container span {
+  font-size: 13px;
+  display: flex;
+  justify-content: center;
+  padding-bottom: 10px;
+}
+.register_container input {
+  width: 330px;
+  padding: 7px;
+}
+.register_container input:focus {
+  outline: none;
+}
+.names {
+  display: flex;
+  gap: 5px;
+}
+.names input {
+  width: 160px;
+}
+.register_container button {
+  width: 122%;
+  padding: 10px 0;
+  background-color: #0000ff;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  transition: 0.3s;
+}
+.register_container button:hover {
+  cursor: pointer;
+  background-color: #fe6613;
+}
+.register_container a {
+  color: #fe6613;
+  margin-left: 5px;
+}
+.input_value {
+  border: 1.335px solid red;
+  border-radius: 3px;
+}
+
+@media (max-width: 540px) {
+  .register_container input {
+    width: 250px;
+    padding: 7px;
+  }
+  .names input {
+    width: 120px;
+  }
+}
