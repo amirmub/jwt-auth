@@ -6,9 +6,9 @@ A secure and minimal JWT-based authentication system using React, Node.js, Expre
 
 ## 📸 Preview
 
-| Register             | Login               | Protected Route       |
-|----------------------|---------------------|------------------------|
-| ![](./client/forum/src/asset/Screenshot%202025-05-29%20154039.png) | ![](./client/forum/src/asset/Screenshot%202025-05-29%20154333.png) | ![](./client/forum/src/asset/Screenshot%202025-05-29%20152520.png) |
+| Register             | Login               
+|----------------------|---------------------
+| ![](./client/forum/src/asset/Screenshot%202025-05-29%20154039.png) | ![](./client/forum/src/asset/Screenshot%202025-05-29%20154333.png)  |
 
 ---
 
