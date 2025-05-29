@@ -3,9 +3,13 @@ import axios from "../../utills/axios";
 import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../../pages/Landing";
 import classes from "./Register.module.css";
+import { FaEyeSlash } from "react-icons/fa6";
+import { IoMdEye } from "react-icons/io";
+
 
 function Register({ onSwitch }) {
   const { setPerson } = useContext(UserContext);
+  const [showPassword, setShowPassword] = useState(false);
   const [inputErrorStyle, setInputErrorStyle] = useState(false);
   const [input, setInput] = useState("");
 
@@ -52,6 +56,10 @@ function Register({ onSwitch }) {
     }
   }
 
+   const toggleVisibility = () => {
+    setShowPassword(prev => !prev);
+  };
+
   return (
     <div className={classes.register_container}>
       <p>Join the network</p>
@@ -67,7 +75,7 @@ function Register({ onSwitch }) {
             <input
               ref={usernameDom}
               type="text"
-              placeholder="username"
+              placeholder="Username"
               className={
                 inputErrorStyle && !usernameDom.current?.value
                   ? classes.input_error
@@ -81,7 +89,7 @@ function Register({ onSwitch }) {
               <input
                 ref={firstnameDom}
                 type="text"
-                placeholder="firstname"
+                placeholder="First Name"
                 className={
                   inputErrorStyle && !firstnameDom.current?.value
                     ? classes.input_error
@@ -94,7 +102,7 @@ function Register({ onSwitch }) {
               <input
                 ref={lastnameDom}
                 type="text"
-                placeholder="lastname"
+                placeholder="Last Name"
                 className={
                   inputErrorStyle && !lastnameDom.current?.value
                     ? classes.input_error
@@ -108,7 +116,7 @@ function Register({ onSwitch }) {
             <input
               ref={emailDom}
               type="email"
-              placeholder="email"
+              placeholder="Email"
               className={
                 inputErrorStyle && !emailDom.current?.value
                   ? classes.input_error
@@ -117,17 +125,18 @@ function Register({ onSwitch }) {
             />
           </div>
           <br />
-          <div>
+          <div className={classes.password_visit}>
             <input
               ref={passwordDom}
-              type="password"
-              placeholder="password"
+              type={showPassword ? 'text' : 'password'}
+              placeholder="Password"
               className={
                 inputErrorStyle && !passwordDom.current?.value
                   ? classes.input_error
                   : ""
               }
             />
+          <div onClick={toggleVisibility} className={classes.eye}>{showPassword ? <IoMdEye /> : <FaEyeSlash /> }</div>
           </div>
           <br />
           <small

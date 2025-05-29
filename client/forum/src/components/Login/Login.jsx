@@ -3,9 +3,12 @@ import axios from "../../utills/axios";
 import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../../pages/Landing";
 import classes from "./Login.module.css";
+import { FaEyeSlash } from "react-icons/fa6";
+import { IoMdEye } from "react-icons/io";
 
 function Login({ onSwitch }) {
   const [input, setInput] = useState("");
+  const [toggle,setToggle] = useState(false)
   const [inputErrorStyle, setInputErrorStyle] = useState(false);
   const { setPerson } = useContext(UserContext);
   const navigate = useNavigate();
@@ -38,6 +41,9 @@ function Login({ onSwitch }) {
       setInput(error.response.data.msg);
     }
   }
+  const toggleVisibility = () =>{
+    setToggle(prev => !prev);
+  }
 
   return (
     <div className={classes.login_container}>
@@ -53,7 +59,7 @@ function Login({ onSwitch }) {
           <div>
             <input
               ref={emailDom}
-              type="email"
+              type="Email"
               placeholder="email"
               className={
                 inputErrorStyle && !emailDom.current?.value
@@ -63,17 +69,18 @@ function Login({ onSwitch }) {
             />
           </div>
           <br />
-          <div>
+          <div className={classes.password_visit}>
             <input
               ref={passwordDom}
-              type="password"
-              placeholder="password"
+              type={toggle ? "text" : "password"}
+              placeholder="Password"
               className={
                 inputErrorStyle && !passwordDom.current?.value
                   ? classes.input_error
                   : ""
               }
             />
+            <div onClick={toggleVisibility} className={classes.eye}>{toggle ? <IoMdEye /> : <FaEyeSlash />}</div>
           </div>
           <br />
           <small

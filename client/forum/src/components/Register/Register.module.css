@@ -33,7 +33,7 @@ form {
   width: 160px;
 }
 .register_container button {
-  width: 138%;
+  width: 133%;
   padding: 10px 0;
   background-color: #0000ff;
   border: none;
@@ -52,6 +52,16 @@ form {
 .input_error {
   border: 1.335px solid red;
   border-radius: 3px;
+}
+.password_visit{
+  display: flex;
+  position: relative;
+}
+.eye{
+  position: absolute;
+  right: 15px;
+  top: 8px;
+  cursor: pointer;
 }
 
 @media (max-width: 540px) {
