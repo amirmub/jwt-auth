@@ -8,7 +8,7 @@ A secure and minimal JWT-based authentication system using React, Node.js, Expre
 
 | Register             | Login               
 |----------------------|---------------------
-| ![](./client/forum/src/asset/Screenshot%202025-05-29%20154039.png) | ![](./client/forum/src/asset/Screenshot%202025-05-29%20154333.png)  |
+| ![](./client/forum/src/asset/Screenshot%202025-05-29%20164700.png) | ![](./client/forum/src/asset/Screenshot%202025-05-29%20164235.png)  |
 
 ---
 
